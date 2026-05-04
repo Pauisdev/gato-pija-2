@@ -1,8 +1,9 @@
 extends Node2D
+export var song: AudioStream
 
 func _ready():
 	if WorldThemePlayer.is_playing(): return
-	WorldThemePlayer.play()
+	WorldThemePlayer.play(song)
 
 func _process(delta):
 	if Input.is_action_just_pressed("go to main menu"):

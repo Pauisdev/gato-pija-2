@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/[Official] Celeste Original Soundtrack - 11 - Quiet and Falling [FjG0ivBT4lQ].mp3-ae409962c8fd2b34579a78dc99b87eb1.mp3str"
+
+[deps]
+
+source_file="res://songs/[Official] Celeste Original Soundtrack - 11 - Quiet and Falling [FjG0ivBT4lQ].mp3"
+dest_files=[ "res://.import/[Official] Celeste Original Soundtrack - 11 - Quiet and Falling [FjG0ivBT4lQ].mp3-ae409962c8fd2b34579a78dc99b87eb1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,7 +1,8 @@
 extends Node2D
 var music_position = 0
 
-func play():
+func play(song: AudioStream):
+	$AudioStreamPlayer.stream = song
 	$AudioStreamPlayer.play()
 	
 func stop():
