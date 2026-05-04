@@ -21,8 +21,6 @@ unique_name_in_owner = true
 position = Vector2( -716, -126 )
 collision_mask = 3
 max_speed = 200
-jump_force = 225
-void_level = 100
 dash_speed = 400
 dash_cooldown = 0.2
 

@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 export var gravity = 10
 export var max_speed = 120
-export var jump_force = 150
+export var jump_force = 250
+export var min_jump_force = 100
 export var void_level = 300
 export var dash_speed = 350
 export var dash_cooldown = 0.35
@@ -16,6 +17,7 @@ var can_die = true
 var has_already_used_double_jump = false
 var is_touching_left_side_of_wall = false
 var is_touching_right_side_of_wall = false
+var jumping = false
 signal died
 
 func _physics_process(delta):
@@ -148,7 +150,15 @@ func handle_rotation():
 	if is_on_floor() or is_on_wall(): set_player_rotation_degrees(stepify(get_player_rotation_degrees(), 90))
 
 func handle_jump():
-	if is_on_floor() and Input.is_action_just_pressed("jump"): motion.y = -jump_force
+	if jumping and Input.is_action_just_released("jump") and motion.y < -min_jump_force:
+		motion.y = -min_jump_force
+		jumping = false
+	
+	if is_on_floor() and Input.is_action_just_pressed("jump"): 
+		jumping = true
+		print('pum')
+		motion.y = -jump_force
+		print(-jump_force)
 
 func handle_movement():
 	if $DashActiveTimer.time_left != 0: return
