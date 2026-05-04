@@ -42,6 +42,7 @@ func handle_death():
 	emit_signal("died")
 
 func handle_skills():
+	if has_died() or has_fell(): return
 	if is_on_floor(): 
 		has_already_used_double_jump = false
 		modulate = Color("fff")
