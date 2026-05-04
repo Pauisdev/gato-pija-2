@@ -1,12 +1,12 @@
 extends KinematicBody2D
 
 export var gravity = 10
-export var max_speed = 120
+export var max_speed = 200
 export var jump_force = 250
 export var min_jump_force = 100
 export var void_level = 300
-export var dash_speed = 350
-export var dash_cooldown = 0.35
+export var dash_speed = 400
+export var dash_cooldown = 0.2
 export var degrees_to_rotate_by = 0.15
 export var acceleration = 0.4
 var motion = Vector2()
@@ -156,9 +156,7 @@ func handle_jump():
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"): 
 		jumping = true
-		print('pum')
 		motion.y = -jump_force
-		print(-jump_force)
 
 func handle_movement():
 	if $DashActiveTimer.time_left != 0: return
