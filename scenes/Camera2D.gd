@@ -1,6 +1,6 @@
 extends Camera2D
-const HORIZONTAL_MOVEMENT = 767
-const VERTICAL_MOVEMENT = 434
+const HORIZONTAL_MOVEMENT = 640
+const VERTICAL_MOVEMENT = 361
 export var movement_speed = 0.35
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
