@@ -166,3 +166,11 @@ func _on_RayCastLeftWall2D_collided():
 
 func _on_RayCastLeftWall2D_no_collision():
 	is_touching_left_side_of_wall = false
+
+
+func _on_RayCastRightWall2D_collided():
+	is_touching_right_side_of_wall = true
+
+
+func _on_RayCastRightWall2D_no_collision():
+	is_touching_right_side_of_wall = false

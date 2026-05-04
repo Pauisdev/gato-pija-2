@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/gato-pija-test-2.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/DoubleJumpParticles.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/PlayerTrail.gd" type="Script" id=9]
 [ext_resource path="res://scenes/RayCastLeftWall2D.gd" type="Script" id=10]
+[ext_resource path="res://scenes/RayCastRightWall2D.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 11 )
@@ -73,6 +74,13 @@ enabled = true
 cast_to = Vector2( -20, 0 )
 script = ExtResource( 10 )
 
+[node name="RayCastRightWall2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 20, 0 )
+script = ExtResource( 11 )
+
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
 [connection signal="collided" from="RayCastLeftWall2D" to="." method="_on_RayCastLeftWall2D_collided"]
 [connection signal="no_collision" from="RayCastLeftWall2D" to="." method="_on_RayCastLeftWall2D_no_collision"]
+[connection signal="collided" from="RayCastRightWall2D" to="." method="_on_RayCastRightWall2D_collided"]
+[connection signal="no_collision" from="RayCastRightWall2D" to="." method="_on_RayCastRightWall2D_no_collision"]
