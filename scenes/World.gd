@@ -22,3 +22,4 @@ func _on_Player_died():
 		var current_scene = get_tree().current_scene.filename
 		SceneTransition.change_scene(current_scene)
 	$UI/DeathPopup.show()
+

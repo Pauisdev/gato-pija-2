@@ -1,22 +1,26 @@
 extends Camera2D
-
-const ZOOM_AMOUNT = 0.3
-const DEFAULT_ZOOM = 0.3
+const HORIZONTAL_MOVEMENT = 767
+const VERTICAL_MOVEMENT = 434
+export var movement_speed = 0.35
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_released("wheel up"):
-		zoom_in(delta)
-	if Input.is_action_just_released("wheel down"):
-		zoom_out(delta)
-	if Input.is_action_just_pressed("reset zoom"):
-		reset_zoom()
+	pass
 
-func zoom_in(delta):
-	zoom = Vector2(zoom.x - ZOOM_AMOUNT * delta, zoom.y - ZOOM_AMOUNT * delta)
-		
-func zoom_out(delta):
-	zoom = Vector2(zoom.x + ZOOM_AMOUNT * delta, zoom.y + ZOOM_AMOUNT * delta)
+func move_left():
+	create_tween().tween_property(self, "position", Vector2(position.x - HORIZONTAL_MOVEMENT, position.y), movement_speed)
+	
+func move_right():
+	create_tween().tween_property(self, "position", Vector2(position.x + HORIZONTAL_MOVEMENT, position.y), movement_speed)
+	
+func move_up():
+	create_tween().tween_property(self, "position", Vector2(position.x, position.y - VERTICAL_MOVEMENT), movement_speed)
+	
+func move_down():
+	create_tween().tween_property(self, "position", Vector2(position.x, position.y + VERTICAL_MOVEMENT), movement_speed)
+	
+func is_inside_vertical_bounds(node: Node):
+	return position.y - VERTICAL_MOVEMENT / 2 < node.position.y and node.position.y < position.y + VERTICAL_MOVEMENT / 2
 
-func reset_zoom():
-	zoom = Vector2(DEFAULT_ZOOM, DEFAULT_ZOOM)
+func is_inside_horizontal_bounds(node: Node):
+	return position.x - HORIZONTAL_MOVEMENT / 2 < node.position.x and node.position.x < position.x + HORIZONTAL_MOVEMENT / 2

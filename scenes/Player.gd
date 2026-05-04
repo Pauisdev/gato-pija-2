@@ -174,3 +174,17 @@ func _on_RayCastRightWall2D_collided():
 
 func _on_RayCastRightWall2D_no_collision():
 	is_touching_right_side_of_wall = false
+
+func _on_Area2D_body_exited(body: Node):
+	if body.name != "Player": return
+	var camera = $"../Camera2D"
+	if not camera.is_inside_horizontal_bounds(body):
+		if position.x < camera.position.x:
+			camera.move_left()
+		if position.x > camera.position.x:
+			camera.move_right()
+	if not camera.is_inside_vertical_bounds(body):
+		if position.y < camera.position.y:
+			camera.move_up()
+		if position.y > camera.position.y:
+			camera.move_down()
