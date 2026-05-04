@@ -14,6 +14,8 @@ unique_name_in_owner = true
 [node name="Player" parent="." groups=["player"] instance=ExtResource( 3 )]
 position = Vector2( -716, -126 )
 collision_mask = 3
+max_speed = 200
+jump_force = 225
 void_level = 100
 
 [node name="WorldTemplate" parent="." instance=ExtResource( 1 )]

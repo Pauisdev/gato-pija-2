@@ -7,6 +7,7 @@ export var void_level = 300
 export var dash_speed = 350
 export var dash_cooldown = 0.35
 export var degrees_to_rotate_by = 0.15
+export var acceleration = 0.4
 var motion = Vector2()
 var rotating_direction = 0
 var time_stopped = false
@@ -150,7 +151,7 @@ func handle_movement():
 	var direction = 0
 	if Input.is_action_pressed("left"): direction = -1
 	elif Input.is_action_pressed("right"): direction = 1
-	else: motion.x = lerp(motion.x, 0, 0.2)
+	else: motion.x = lerp(motion.x, 0, acceleration)
 	motion.x += direction * max_speed * 0.1
 	motion.x = clamp(motion.x, -max_speed, max_speed)
 
