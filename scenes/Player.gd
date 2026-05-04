@@ -126,15 +126,15 @@ func handle_wall_jump():
 	#	elif normal.x > 0:
 	#		is_touching_left_side_of_wall = true
 	if is_touching_left_side_of_wall:
-		motion.y = -jump_force * 1.5
-		motion.x = jump_force * 1.5
+		motion.y = -jump_force
+		motion.x = jump_force
 		$DoubleJumpParticles.emit()
 		$DoubleJumpSkillActivatedPlayer.play()
 		is_touching_left_side_of_wall = false
 		return true
 	if is_touching_right_side_of_wall:
-		motion.y = -jump_force * 1.5
-		motion.x = -jump_force * 1.5
+		motion.y = -jump_force
+		motion.x = -jump_force
 		$DoubleJumpParticles.emit()
 		$DoubleJumpSkillActivatedPlayer.play()
 		is_touching_right_side_of_wall = false
