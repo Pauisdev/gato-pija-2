@@ -18,6 +18,7 @@ var has_already_used_double_jump = false
 var is_touching_left_side_of_wall = false
 var is_touching_right_side_of_wall = false
 var jumping = false
+var has_already_used_dash = false
 signal died
 
 func _physics_process(delta):
@@ -48,6 +49,7 @@ func handle_skills():
 	if is_on_floor(): 
 		has_already_used_double_jump = false
 		modulate = Color("fff")
+		has_already_used_dash = false
 	if Input.is_action_just_pressed("jump") and not is_on_floor(): 
 		var executed = handle_wall_jump()
 		if executed: return
@@ -56,7 +58,7 @@ func handle_skills():
 
 func _on_CooldownTimer_timeout(): 
 	skill_on_cooldown = false
-	modulate = Color("fff")
+	#modulate = Color("fff")
 
 func _on_UI_skill_menu_opened():
 	time_stopped = true
@@ -79,7 +81,7 @@ func handle_double_jump_skill():
 	$DoubleJumpParticles.emit()
 	Input.start_joy_vibration(0, 0.2, 0.2, 0.2)
 	has_already_used_double_jump = true
-	modulate = Color("4aa2ff")
+	#modulate = Color("4aa2ff")
 	motion.y = -jump_force
 
 func rotate_player(rotation_degrees):
@@ -92,6 +94,7 @@ func set_player_rotation_degrees(rotation_degrees):
 	$Sprite.rotation_degrees = rotation_degrees
 
 func handle_dash_skill():
+	if has_already_used_dash: return
 	if $CooldownTimer.time_left != 0: return
 	if $Manabar.remaining_mana < 50: 
 		$NotEnoughManaPlayer.play()
@@ -105,6 +108,7 @@ func handle_dash_skill():
 	Input.start_joy_vibration(0, 0.1, 0.1, 0.3)
 	motion.x = 0
 	motion.y = 0
+	has_already_used_dash = true
 	handle_dash_input()
 	modulate = Color("4aa2ff")
 	has_already_used_double_jump = false
@@ -118,7 +122,6 @@ func handle_dash_input():
 	motion = motion.normalized() * dash_speed
 	if motion.x == 0 and motion.y != 0:
 		motion.y = 282 * (1 if motion.y >= 0 else -1)
-	print(motion)
 
 func handle_wall_jump():
 	#for i in range(get_slide_count()):
