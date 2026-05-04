@@ -258,6 +258,7 @@ background_color = Color( 0.729412, 0.729412, 0.729412, 1 )
 adjustment_enabled = true
 
 [node name="WorldTemplate" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 16 )
 
 [node name="WorldTileMap" type="TileMap" parent="."]

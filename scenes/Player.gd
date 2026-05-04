@@ -99,7 +99,7 @@ func handle_dash_skill():
 	$CooldownTimer.start(dash_cooldown)
 	$Manabar.reduce_mana(50)
 	$DashSkillActivatedPlayer.play()
-	Input.start_joy_vibration(0, 0.2, 0.2, 0.6)
+	Input.start_joy_vibration(0, 0.1, 0.1, 0.3)
 	motion.x = 0
 	motion.y = 0
 	handle_dash_input()
