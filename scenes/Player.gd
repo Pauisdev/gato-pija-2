@@ -19,6 +19,7 @@ var is_touching_left_side_of_wall = false
 var is_touching_right_side_of_wall = false
 var jumping = false
 var has_already_used_dash = false
+var is_dead = false
 signal died
 
 func _physics_process(delta):
@@ -41,6 +42,7 @@ func has_fell():
 func handle_death():
 	if not can_die: return
 	if not has_died() and not has_fell(): return
+	is_dead = true
 	modulate = Color.red
 	emit_signal("died")
 
@@ -156,6 +158,7 @@ func handle_rotation():
 	if is_on_floor() or is_on_wall(): set_player_rotation_degrees(stepify(get_player_rotation_degrees(), 90))
 
 func handle_jump():
+	if is_dead: return
 	if jumping and Input.is_action_just_released("jump") and motion.y < -min_jump_force:
 		motion.y = -min_jump_force
 		jumping = false
@@ -168,8 +171,10 @@ func handle_movement():
 	if $DashActiveTimer.time_left != 0: return
 	motion.y += gravity
 	var direction = 0
-	if Input.is_action_pressed("left"): direction = -1
-	elif Input.is_action_pressed("right"): direction = 1
+	if Input.is_action_pressed("left") and not is_dead: 
+		direction = -1
+	elif Input.is_action_pressed("right") and not is_dead: 
+		direction = 1
 	else: motion.x = lerp(motion.x, 0, acceleration)
 	motion.x += direction * max_speed * 0.1
 	motion.x = clamp(motion.x, -max_speed, max_speed)
