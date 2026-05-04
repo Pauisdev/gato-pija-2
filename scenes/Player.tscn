@@ -55,7 +55,6 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Manabar" parent="." instance=ExtResource( 4 )]
-remaining_mana = 999
 
 [node name="NotEnoughManaPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

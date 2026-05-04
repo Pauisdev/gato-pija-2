@@ -18,6 +18,7 @@ max_speed = 200
 jump_force = 225
 void_level = 100
 dash_speed = 400
+dash_cooldown = 0.2
 
 [node name="WorldTemplate" parent="." instance=ExtResource( 1 )]
 
