@@ -71,7 +71,6 @@ func _on_Coin2_coin_obtained(): $"%UI".set_second_coin_as_obtained()
 func _on_Coin3_coin_obtained(): $"%UI".set_third_coin_as_obtained()
 
 func handle_double_jump_skill():
-	if is_touching_left_side_of_wall or is_touching_right_side_of_wall: return
 	if has_already_used_double_jump: return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
