@@ -116,6 +116,9 @@ func handle_dash_input():
 	if Input.is_action_pressed("look up joystick"): motion.y = -1
 	if Input.is_action_pressed("down"): motion.y = 1
 	motion = motion.normalized() * dash_speed
+	if motion.x == 0 and motion.y != 0:
+		motion.y = 282 * (1 if motion.y >= 0 else -1)
+	print(motion)
 
 func handle_wall_jump():
 	#for i in range(get_slide_count()):
