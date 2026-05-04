@@ -20,6 +20,7 @@ var is_touching_right_side_of_wall = false
 var jumping = false
 var has_already_used_dash = false
 var is_dead = false
+var jumped_before_double_jump = false
 signal died
 
 func _physics_process(delta):
@@ -79,6 +80,7 @@ func _on_Coin3_coin_obtained(): $"%UI".set_third_coin_as_obtained()
 
 func handle_double_jump_skill():
 	if has_already_used_double_jump: return
+	if not jumped_before_double_jump: return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
 	Input.start_joy_vibration(0, 0.2, 0.2, 0.2)
@@ -165,9 +167,12 @@ func handle_jump():
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"): 
 		jumping = true
+		jumped_before_double_jump = true
 		motion.y = -jump_force
 
 func handle_movement():
+	if is_on_floor():
+		jumped_before_double_jump = false
 	if $DashActiveTimer.time_left != 0: return
 	motion.y += gravity
 	var direction = 0
