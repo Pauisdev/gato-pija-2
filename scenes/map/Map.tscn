@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/map/Spikes_0.tscn" type="PackedScene" id=0]
 [ext_resource path="res://scenes/map/Lava_1.tscn" type="PackedScene" id=1]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/map/Blocks_3.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/map/Inside_blocks_4.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sprites/background_sewers.png" type="Texture" id=5]
+[ext_resource path="res://scenes/map/Particles.gd" type="Script" id=6]
 [ext_resource path="res://shaders/fluid.tres" type="Shader" id=7]
 [ext_resource path="res://scenes/AnimatedFluidTileMap.gd" type="Script" id=8]
 [ext_resource path="res://sprites/bg.png" type="Texture" id=9]
@@ -73,3 +74,40 @@ script = ExtResource( 8 )
 
 [node name="Spikes" parent="." groups=["danger"] instance=ExtResource( 0 )]
 tile_data = PoolIntArray( 655377, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0 )
+
+[node name="Particles2" type="CPUParticles2D" parent="."]
+position = Vector2( 536, -0.999998 )
+rotation = 1.60181
+amount = 64
+lifetime = 2.0
+emission_shape = 2
+emission_rect_extents = Vector2( 30, 20 )
+gravity = Vector2( 0, 0 )
+radial_accel = 20.0
+radial_accel_random = 0.8
+color = Color( 0.737255, 0, 0.509804, 0.647059 )
+script = ExtResource( 6 )
+
+[node name="Particles3" type="CPUParticles2D" parent="."]
+position = Vector2( 640, 296 )
+amount = 64
+lifetime = 2.0
+emission_shape = 2
+emission_rect_extents = Vector2( 30, 20 )
+gravity = Vector2( 0, 0 )
+radial_accel = 20.0
+radial_accel_random = 0.8
+color = Color( 0.737255, 0, 0.509804, 0.647059 )
+script = ExtResource( 6 )
+
+[node name="Particles1" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 294 )
+amount = 64
+lifetime = 2.0
+emission_shape = 2
+emission_rect_extents = Vector2( 30, 20 )
+gravity = Vector2( 0, 0 )
+radial_accel = 20.0
+radial_accel_random = 0.8
+color = Color( 0.737255, 0, 0.509804, 0.647059 )
+script = ExtResource( 6 )
