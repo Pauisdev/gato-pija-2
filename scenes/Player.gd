@@ -49,14 +49,11 @@ func handle_death():
 	if not has_died() and not has_fell(): return
 	if not is_dead:
 		$Sprite.explode()
+		WorldThemePlayer.play_next_death_effect()
 		var tween = get_tree().create_tween()
 		tween.tween_interval(0.5)
 		tween.tween_callback(self, "restart_scene")
-		
-		
 	is_dead = true
-	#modulate = Color.red
-	#emit_signal("died")
 
 func handle_skills():
 	if has_died() or has_fell(): return

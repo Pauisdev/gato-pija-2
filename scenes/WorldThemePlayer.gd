@@ -17,3 +17,6 @@ func pause():
 
 func resume():
 	$AudioStreamPlayer.play(music_position)
+
+func play_next_death_effect():
+	$ExplosionPlayer.play_next()
