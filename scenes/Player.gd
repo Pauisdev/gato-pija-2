@@ -25,6 +25,7 @@ signal died
 func _physics_process(delta):
 	if time_stopped: return
 	handle_death()
+	handle_just_in_time_jump()
 	handle_movement()
 	handle_rotation()
 	handle_jump()
@@ -86,7 +87,10 @@ func _on_Coin2_coin_obtained(): $"%UI".set_second_coin_as_obtained()
 func _on_Coin3_coin_obtained(): $"%UI".set_third_coin_as_obtained()
 
 func handle_double_jump_skill():
-	if has_already_used_double_jump: return
+	if has_already_used_double_jump:
+		#store jump so we can perform it 
+		$JustInTimeJumpTimer.start()
+		return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
 	Input.start_joy_vibration(0, 0.1, 0.1, 0.1)
@@ -216,3 +220,9 @@ func _on_Area2D_body_exited(body: Node):
 			camera.move_up()
 		if position.y > camera.position.y:
 			camera.move_down()
+
+func handle_just_in_time_jump():
+	if $JustInTimeJumpTimer.time_left == 0:
+		return
+	if is_on_floor() and not is_dead:
+		motion.y = -jump_force / 1.2
