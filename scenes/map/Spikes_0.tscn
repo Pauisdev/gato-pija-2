@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="tileset.tres" type="TileSet" id=1]
+
+[node name="Spikes_0" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 655377, 0, 0 )

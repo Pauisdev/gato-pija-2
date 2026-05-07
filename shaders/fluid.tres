@@ -6,7 +6,8 @@ uniform float offset: hint_range(0, 1) = 0.0;
 
 void fragment(){
 	vec2 uv = UV;
-    uv.x += offset;
+	uv.x += offset;
+	//if(uv.x >= 1.0) uv.x = 0.0;
     uv.x = fract(uv.x);
     COLOR = texture(TEXTURE, uv);
 }"

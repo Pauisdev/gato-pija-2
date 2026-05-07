@@ -16,7 +16,7 @@
 extents = Vector2( 10, 11 )
 
 [sub_resource type="Curve" id=2]
-_data = [ Vector2( 0.0125, 0.0363636 ), 0.0, 0.0, 0, 0, Vector2( 0.979167, 0.936364 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0125, 0.0363636 ), 0.0, 0.0, 0, 0, Vector2( 0.990476, 0.5 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.435407, 1 )
@@ -66,7 +66,6 @@ stream = ExtResource( 7 )
 volume_db = -10.0
 
 [node name="DashTrail" type="Line2D" parent="."]
-width = 20.0
 width_curve = SubResource( 2 )
 gradient = SubResource( 3 )
 script = ExtResource( 9 )
