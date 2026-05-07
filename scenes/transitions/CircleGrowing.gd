@@ -1,8 +1,8 @@
 extends CanvasLayer
 
 func play():
-	visible = true
 	$Animator.play("CoverScreen")
+	#visible = true
 
 func play_backwards():
 	visible = true
