@@ -91,7 +91,7 @@ func handle_double_jump_skill():
 	if not jumped_before_double_jump: return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
-	Input.start_joy_vibration(0, 0.2, 0.2, 0.2)
+	Input.start_joy_vibration(0, 0.1, 0.1, 0.1)
 	has_already_used_double_jump = true
 	#modulate = Color("4aa2ff")
 	motion.y = -jump_force
