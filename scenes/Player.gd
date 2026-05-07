@@ -43,9 +43,11 @@ func has_fell():
 func handle_death():
 	if not can_die: return
 	if not has_died() and not has_fell(): return
+	if not is_dead:
+		$Sprite.explode()
 	is_dead = true
-	modulate = Color.red
-	emit_signal("died")
+	#modulate = Color.red
+	#emit_signal("died")
 
 func handle_skills():
 	if has_died() or has_fell(): return
