@@ -20,7 +20,6 @@ var is_touching_right_side_of_wall = false
 var jumping = false
 var has_already_used_dash = false
 var is_dead = false
-var jumped_before_double_jump = false
 signal died
 
 func _physics_process(delta):
@@ -48,15 +47,15 @@ func handle_death():
 	if not can_die: return
 	if not has_died() and not has_fell(): return
 	if not is_dead:
+		is_dead = true
 		$Sprite.explode()
 		WorldThemePlayer.play_next_death_effect()
 		var tween = get_tree().create_tween()
 		tween.tween_interval(0.5)
 		tween.tween_callback(self, "restart_scene")
-	is_dead = true
 
 func handle_skills():
-	if has_died() or has_fell(): return
+	if has_died() or has_fell() or is_dead: return
 	if is_on_floor(): 
 		has_already_used_double_jump = false
 		modulate = Color("fff")
@@ -88,7 +87,6 @@ func _on_Coin3_coin_obtained(): $"%UI".set_third_coin_as_obtained()
 
 func handle_double_jump_skill():
 	if has_already_used_double_jump: return
-	if not jumped_before_double_jump: return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
 	Input.start_joy_vibration(0, 0.1, 0.1, 0.1)
@@ -175,12 +173,9 @@ func handle_jump():
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"): 
 		jumping = true
-		jumped_before_double_jump = true
 		motion.y = -jump_force
 
 func handle_movement():
-	if is_on_floor():
-		jumped_before_double_jump = false
 	if $DashActiveTimer.time_left != 0: return
 	motion.y += gravity
 	var direction = 0
