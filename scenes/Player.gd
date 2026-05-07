@@ -39,12 +39,21 @@ func has_died():
 		
 func has_fell():
 	return position.y > void_level
-	
+
+func restart_scene():
+	var current_scene = get_tree().current_scene.filename
+	SceneTransition.change_scene(current_scene)
+
 func handle_death():
 	if not can_die: return
 	if not has_died() and not has_fell(): return
 	if not is_dead:
 		$Sprite.explode()
+		var tween = get_tree().create_tween()
+		tween.tween_interval(0.5)
+		tween.tween_callback(self, "restart_scene")
+		
+		
 	is_dead = true
 	#modulate = Color.red
 	#emit_signal("died")
