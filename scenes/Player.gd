@@ -20,6 +20,7 @@ var is_touching_right_side_of_wall = false
 var jumping = false
 var has_already_used_dash = false
 var is_dead = false
+var rotating_player_during_dash = false
 signal died
 
 func _physics_process(delta):
@@ -128,6 +129,8 @@ func handle_dash_skill():
 	modulate = Color("4aa2ff")
 	has_already_used_double_jump = false
 	skill_on_cooldown = true
+	$DashRotationTimer.start()
+	rotating_player_during_dash = true
 
 func handle_dash_input():
 	if Input.is_action_pressed("left"): motion.x = -1
@@ -153,8 +156,12 @@ func handle_rotation():
 		if Input.is_action_pressed("right"): rotating_direction = 1
 		elif Input.is_action_pressed("left"): rotating_direction = -1
 		else: rotating_direction = 0
+	if rotating_player_during_dash: 
+		rotating_direction = 1 * (1 if Input.is_action_pressed("right") else -1)
 	rotate_player(degrees_to_rotate_by * rotating_direction)
 	if is_on_floor() or is_on_wall(): set_player_rotation_degrees(stepify(get_player_rotation_degrees(), 90))
+	if $DashRotationTimer.time_left == 0:
+		rotating_player_during_dash = false
 
 func handle_jump():
 	if is_dead: return

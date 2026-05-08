@@ -90,6 +90,10 @@ script = ExtResource( 11 )
 wait_time = 0.1
 one_shot = true
 
+[node name="DashRotationTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
 [connection signal="collided" from="RayCastLeftWall2D" to="." method="_on_RayCastLeftWall2D_collided"]
 [connection signal="no_collision" from="RayCastLeftWall2D" to="." method="_on_RayCastLeftWall2D_no_collision"]
