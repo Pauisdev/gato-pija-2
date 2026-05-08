@@ -93,6 +93,7 @@ func handle_double_jump_skill():
 		return
 	$DoubleJumpSkillActivatedPlayer.play()
 	$DoubleJumpParticles.emit()
+	play_jelly_animation()
 	Input.start_joy_vibration(0, 0.1, 0.1, 0.1)
 	has_already_used_double_jump = true
 	#modulate = Color("4aa2ff")
@@ -138,28 +139,14 @@ func handle_dash_input():
 		motion.y = 282 * (1 if motion.y >= 0 else -1)
 
 func handle_wall_jump():
-	#for i in range(get_slide_count()):
-	#	var collision = get_slide_collision(i)
-	#	var normal = collision.normal
-	#	if normal.x < 0:
-	#		is_touching_right_side_of_wall = true
-	#	elif normal.x > 0:
-	#		is_touching_left_side_of_wall = true
-	if is_touching_left_side_of_wall:
-		motion.y = -jump_force
-		motion.x = jump_force
-		$DoubleJumpParticles.emit()
-		$DoubleJumpSkillActivatedPlayer.play()
-		is_touching_left_side_of_wall = false
-		return true
-	if is_touching_right_side_of_wall:
-		motion.y = -jump_force
-		motion.x = -jump_force
-		$DoubleJumpParticles.emit()
-		$DoubleJumpSkillActivatedPlayer.play()
-		is_touching_right_side_of_wall = false
-		return true
-	return false
+	if not is_touching_left_side_of_wall and not is_touching_right_side_of_wall: return false
+	play_jelly_animation()
+	motion.y = -jump_force
+	motion.x = jump_force * (-1 if is_touching_right_side_of_wall else 1)
+	$DoubleJumpParticles.emit()
+	$DoubleJumpSkillActivatedPlayer.play()
+	is_touching_left_side_of_wall = false
+	return true
 		
 func handle_rotation():
 	if is_on_floor():
@@ -176,6 +163,7 @@ func handle_jump():
 		jumping = false
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"): 
+		play_jelly_animation()
 		jumping = true
 		motion.y = -jump_force
 
@@ -225,4 +213,15 @@ func handle_just_in_time_jump():
 	if $JustInTimeJumpTimer.time_left == 0:
 		return
 	if is_on_floor() and not is_dead:
+		play_jelly_animation()
 		motion.y = -jump_force / 1.2
+
+func play_jelly_animation():
+	var direction = Vector2(1,1).rotated($Sprite.rotation).round()
+	var tween = get_tree().create_tween()
+	if direction.x == direction.y: # Up or down
+		tween.tween_property($Sprite, "scale", Vector2(0.5, 1.5), 0.1)
+		tween.tween_property($Sprite, "scale", Vector2(1, 1), 0.1)
+	else: # Sideways
+		tween.tween_property($Sprite, "scale", Vector2(1.5, 0.5), 0.1)
+		tween.tween_property($Sprite, "scale", Vector2(1, 1), 0.1)
